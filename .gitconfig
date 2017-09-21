@@ -1,14 +1,13 @@
+# This is Git's per-user configuration file.
 [user]
-	name = Eirik Kvalheim
-	email = eirikkva@gmail.com
-[push]
-	default = simple
+    name = Eirik Kvalheim
+    email = eirik.kvalheim@dinerp.no
 
 [alias]
-br = branch
-co = checkout
-st = status
-last = log -1 HEAD
+	br = branch
+	co = checkout
+	s = status -s
+	last = log -1 HEAD
 
 # View abbreviated SHA, description, and history graph of the latest 20 commits
 	l = log --pretty=oneline -n 20 --graph --abbrev-commit
@@ -17,6 +16,48 @@ last = log -1 HEAD
 	tags = tag -l
 	branches = branch -a
 	remotes = remote -v
+
+	# Remove the old tag with this name and tag the latest commit with it.
+	retag = "!r() { git tag -d $1 && git push origin :refs/tags/$1 && git tag $1; }; r"
+
+	# Find commits by source code
+	fc = "!f() { git log --pretty=format:'%C(yellow)%h  %Cblue%ad  %Creset%s%Cgreen  [%cn] %Cred%d' --decorate --date=short -S$1; }; f"
+
+	# Find commits by commit message
+	fm = "!f() { git log --pretty=format:'%C(yellow)%h  %Cblue%ad  %Creset%s%Cgreen  [%cn] %Cred%d' --decorate --date=short --grep=$1; }; f"
+
+	# Remove branches that have already been merged with master
+	# a.k.a. ‘delete merged’
+	dm = "!git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d"
 	
-# List contributors with number of commits
+	# List contributors with number of commits
 	contributors = shortlog --summary --numbered
+
+	# List aliases
+	aliases = config --get-regexp alias
+
+
+[color]
+
+	# Use colors in Git commands that are capable of colored output when
+	# outputting to the terminal. (This is the default setting in Git ≥ 1.8.4.)
+	ui = auto
+
+[color "branch"]
+
+	current = yellow reverse
+	local = yellow
+	remote = green
+
+[color "diff"]
+
+	meta = yellow bold
+	frag = magenta bold # line info
+	old = red # deletions
+	new = green # additions
+
+[color "status"]
+
+	added = yellow
+	changed = green
+	untracked = cyan
