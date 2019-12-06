@@ -1,0 +1,42 @@
+[user]
+	name = Eirik Kvalheim
+	email = eirik.kvalheim@dinerp.no
+
+[push]
+	default = simple
+[core]
+	autocrlf = false
+
+	editor = 'C:\\Users\\eirik\\AppData\\Local\\Programs\\Microsoft VS Code\\Code.exe' --wait
+[alias]
+	br = branch
+	co = checkout
+	s = status
+	last = log -1 HEAD
+
+	# View abbreviated SHA, description, and history graph of the latest 20 commits
+	l = log --pretty=oneline -n 20 --graph --abbrev-commit
+
+	# Show verbose output about tags, branches or remotes
+	tags = tag -l
+	branches = branch -a
+	remotes = remote -v
+
+	# Remove the old tag with this name and tag the latest commit with it.
+	retag = "!r() { git tag -d $1 && git push origin :refs/tags/$1 && git tag $1; }; r"
+
+	# Find commits by source code
+	fc = "!f() { git log --pretty=format:'%C(yellow)%h  %Cblue%ad  %Creset%s%Cgreen  [%cn] %Cred%d' --decorate --date=short -S$1; }; f"
+
+	# Find commits by commit message
+	fm = "!f() { git log --pretty=format:'%C(yellow)%h  %Cblue%ad  %Creset%s%Cgreen  [%cn] %Cred%d' --decorate --date=short --grep=$1; }; f"
+
+	# Remove branches that have already been merged with master
+	# a.k.a. â€˜delete mergedâ€™
+	dm = "!git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d"
+	
+	# List contributors with number of commits
+	contributors = shortlog --summary --numbered
+
+	# List aliases
+	aliases = config --get-regexp alias
