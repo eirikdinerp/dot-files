@@ -13,7 +13,6 @@ history=cat "%CMDER_ROOT%\config\.history"
 unalias=alias /d $1
 vi=vim $*
 cmderr=cd /d "%CMDER_ROOT%"
-dinerp= cd c:\eirik\dinerp
+home= cd c:\Users\eirikk\CODE
 
-ssh-dinerp= ssh-add C:\Users\eirik\.ssh\dinerp
-ssh-nextmark= ssh-add C:\Users\eirik\.ssh\nextmark
+ssh-netcompany= ssh-add C:\Users\eirikk\.ssh\netcompany

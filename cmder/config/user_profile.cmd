@@ -1,10 +1,13 @@
 :: use this file to run your own startup commands
 :: use in front of the command to prevent printing the command
 
+:: https://github.com/cmderdev/cmder/issues/1781
+set "PATH=%GIT_INSTALL_ROOT%\usr\bin;%PATH%"
+
 :: uncomment this to have the ssh agent load when cmder starts
 call "%GIT_INSTALL_ROOT%/cmd/start-ssh-agent.cmd" /k exit
-::ssh-add C:\Users\eirik\.ssh\dinerp
-:: ssh-add C:\Users\eirik\.ssh\nextmark
+::ssh-add C:\Users\eirikk\.ssh\eirikkva_rsa
+
 :: uncomment the next two lines to use pageant as the ssh authentication agent
 :: SET SSH_AUTH_SOCK=/tmp/.ssh-pageant-auth-sock
 :: call "%GIT_INSTALL_ROOT%/cmd/start-ssh-pageant.cmd"
